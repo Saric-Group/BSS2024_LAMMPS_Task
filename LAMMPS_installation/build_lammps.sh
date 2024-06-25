@@ -31,7 +31,7 @@ if [ ! -f $LAMMPSDIR/src/lmp_mpi ]; then
 	make clean-all
 	make no-all
 	make yes-dipole yes-rigid yes-molecule
-	make -j4 mpi
+	make serial
 	cd "$WDIR"
 fi
 
