@@ -24,7 +24,7 @@ def main():
         
     print("Writing input file ... ")
     
-    f_in = open(InputPath + 'in.local','w') # this is our input files directory
+    f_in = open(InputPath + '/in.local','w') # this is our input files directory
     f_in.write('''
     
 # set up our simulation environment
@@ -121,7 +121,7 @@ run            50000''') ### IF you want to change the length of the simulation,
     print("Writing data file ... ")
     
     
-    f_dat = open(InputPath + 'data','w')
+    f_dat = open(InputPath + '/data','w')
     w=0
     
     f_ogdat = open(InputPath+"/Membrane.data")
