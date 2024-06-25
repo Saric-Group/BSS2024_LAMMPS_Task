@@ -18,7 +18,7 @@ def main():
     epslions = f.Epsilon # this is the interaction strength of patches (could be changed to have different values for different patches)
     x,y,z = f.x,f.y,f.z    
     NumPatches= len(IDs)
-    seed = sys.argv(
+    seed = sys.argv[1]
     
     
         
@@ -91,8 +91,10 @@ pair_coeff		1	1	membrane ${eps} ${sigma} ${rmin} ${rc} ${zeta} ${mu} ${theta0_11
 neigh_modify	every 1	delay 1	exclude group np np
 
 # we set up the integration parameters
-
-fix			fLANG		all		langevin 1.0 1.0 1.0 1000 zero yes omega yes
+''')
+    
+    f_in.write('fix			fLANG		all		langevin 1.0 1.0 1.0 '+str(seed)+' zero yes omega yes\n') ## reading seed!
+    f_in.write('''
 fix			fNPH		mem		nph/sphere	x 0.0 0.0 10.0	y 0.0 0.0 10.0 couple xy update dipole dilate all
 fix_modify	fNPH		temp ct press thermo_press
 fix			fRIGID		np		rigid/nve	group 1 np
