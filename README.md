@@ -7,6 +7,10 @@ This repository contains bash and Python scripts to:
 
 [LAMMPS_installation](LAMMPS_installation) contains the [bash script](LAMMPS_installation/build_lammps.sh) to download and install LAMMPS, which will be placed in a folder [lammps](LAMMPS_installation/lammps) (not part of this repository) after installation.
 
+## The objective of the task
+
+Nanoparticles covered in ligands will spontaneously get wrapped and bud out of a membrane for a sufficiently high total binding energy. However, depending on the number, spatial distribution and relative binding strength of these ligands, the kinetic pathway and efficiency of this process may vary. The objective of this workshop is to explore this phenomenon by running Molecular Dynamics simulations of a nanoparticle being engulfed by a membrane for a fixed total binding energy but varying ligand organisation. As a benchmark, we introduce the example of a homogeneous distribution of ligands with equal binding strength. *Can you come up with a design that performs better?* Your only constraint is to keep the total binding energy (sum of all the ligands binding energy) constant with respect to the benchmark. Our criteria for performance are twofold: 1) _Speed_: can your design lead to faster engulfment? 2) _Robustness_: does your design display less variability in the engulfment sucess and required time?
+
 ## How to do things
 
 In order to run the simulations on your laptop you will need to first download and compile the right version of LAMMPS. To do so, from [LAMMPS_installation](LAMMPS_installation) type `bash build_lammps.sh`
