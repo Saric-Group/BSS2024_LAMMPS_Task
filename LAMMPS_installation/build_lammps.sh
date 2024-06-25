@@ -15,10 +15,10 @@ if [ ! -d $LAMMPSDIR ]; then
 
         if ! [ -x "$(command -v wget)" ]; then
                 echo "you do not have wget installed on this computer, please download lammps Feb16 version manually and place it in a directory called 'lammps' at the same level as this file"
-                echo "copy this link into your browser: http://lammps.sandia.gov/tars/lammps-16Feb16.tar.gz"
+                echo "copy this link into your browser: https://download.lammps.org/tars/lammps-16Feb2016.tar.gz"
                 echo "extract this tar and copy the resulting file to the lammps directory"
         else
-                wget -qO- http://lammps.sandia.gov/tars/lammps-16Feb16.tar.gz | tar xvz 
+                wget -qO- https://download.lammps.org/tars/lammps-16Feb2016.tar.gz | tar xvz 
                 mv lammps* $LAMMPSDIR
         fi
 fi
@@ -31,7 +31,7 @@ if [ ! -f $LAMMPSDIR/src/lmp_mpi ]; then
 	make clean-all
 	make no-all
 	make yes-dipole yes-rigid yes-molecule
-	make -j4 mpi
+	make serial
 	cd "$WDIR"
 fi
 
