@@ -25,7 +25,7 @@ Once LAMMPS is properly installed you can then set up your simulations by:
      1) ID of the binding site (increasing from 1)
      2) type of the binding site (increasing from 3 as there are already two types of beads in the system besides the binding sites: membrane and nanoparticle)
      3) Epsilon: binding potential strength (in kT units)
-     4) x,y,z coordinates of the binding site (relative to the nanoparticle's center)
+     4) x,y,z coordinates of the binding site (relative to the nanoparticle's center). Note that in the example, the binding sites are evenly distributed over the surface of the nanoparticle, which has radius `4` (this size should not change).
 5. Go to your set directory (‘~/scenario1‘) in this example. You can do this by running `cd ~/scenario1`
 6. Run the [Python setup script](MakeLammpsInput.py) from the set directory giving it a seed for the random number generator from the command line: `python3 ${path_to_this_repository}/MakeLammpsInput.py 12345` for example, to set it up with seed `12345`
 7. Go to the seed folder. Run `cd sd12345`
