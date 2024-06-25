@@ -49,8 +49,8 @@ boundary		p p p\n''')
 
 group		mem			type 1
 group		vehicle		type 2
-group		ligand 		type 3:26
-group		np      	type 2:26
+group		ligand 		type >= 3
+group		np      	type >= 2
 
 
 #give our particle a small kick towards the membrane
