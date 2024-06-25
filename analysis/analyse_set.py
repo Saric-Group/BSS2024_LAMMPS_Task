@@ -39,6 +39,7 @@ def extract(path, rmax = 1.5):
         cl_props.compute((box, mem), cl.cluster_idx)
         # Extract cluster sizes
         sizes = cl_props.sizes
+        sizes = sizes[sizes > 10]
         # Store number of clusters and frame number
         ncl.append(len(sizes))
         frs.append(f)
@@ -65,6 +66,9 @@ def analyse_seeds(path, rmax = 1.5):
         if 2 in data['ncl'].values:
             # If budding occurs, store frame number
             buds.append(data[data['ncl'] == 2].iloc[0]['frame'])
+        else:
+            # If budding does not occur, store NaN
+            buds.append(np.nan)
     # Build pandas dataframe with budding frames
     buds = pd.DataFrame({'seed':seeds,'frame':buds})
     # Save dataframe to file and return it
@@ -81,4 +85,8 @@ if __name__ == '__main__':
     data = analyse_seeds(gpath)
 
     # Print frame where budding occurs
+    print()
+    print()
     print(data)
+    print()
+    print()
