@@ -99,7 +99,8 @@ fix			fNPH		mem		nph/sphere	x 0.0 0.0 10.0	y 0.0 0.0 10.0 couple xy update dipol
 fix_modify	fNPH		temp ct press thermo_press
 fix			fRIGID		np		rigid/nve	group 1 np
 
-#output settings, changing peps will change the output file name as well, change this by removing ${peps} from the dump file name''')
+#output settings, changing peps will change the output file name as well, change this by removing ${peps} from the dump file name
+''')
 
     f_in.write('dump			coords all custom 100 output.xyz id type x y z c_cls')
     f_in.write('''  

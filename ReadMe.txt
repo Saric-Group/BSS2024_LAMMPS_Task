@@ -7,3 +7,6 @@ When running lammps with these inputs :
 
 
 python /Users/billiemeadowcroft/Dropbox/BoulderSummerSchool/Task/
+
+
+/Users/billiemeadowcroft/Dropbox/code/Lammps_starter/np-toolkit/lammps/src/lmp_mpi -in in.local
