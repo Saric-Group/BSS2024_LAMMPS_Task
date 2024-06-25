@@ -12,7 +12,7 @@ def main():
     InputPath = os.path.join(str(os.getcwd()))
     
     print("Reading data ... ")
-    f = pandas.read_csv(InputPath+"InputData.txt", header = [0],sep = ' ')
+    f = pandas.read_csv(InputPath+"/InputData.txt", header = [0],sep = ' ')
     IDs = f.ID
     types = f.type
     epslions = f.Epsilon # this is the interaction strength of patches (could be changed to have different values for different patches)
@@ -32,7 +32,7 @@ dimension		3
 units			lj
 atom_style		hybrid sphere dipole
 boundary		p p p\n''')
-    f_in.write('read_data			"'+InputPath + 'data"\n') # here we specify where the data is for the initial configurations of our particles
+    f_in.write('read_data			"'+InputPath + '/data"\n') # here we specify where the data is for the initial configurations of our particles
     f_in.write('''
     #group particles according to their types
 
