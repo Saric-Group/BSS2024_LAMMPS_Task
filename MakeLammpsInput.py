@@ -124,7 +124,7 @@ run            50000''') ### IF you want to change the length of the simulation,
     f_dat = open(InputPath + 'data','w')
     w=0
     
-    f_ogdat = open(InputPath+"Membrane.data")
+    f_ogdat = open(InputPath+"/Membrane.data")
     #while w==1:
     for l in range(2944):
         line = f_ogdat.readline()
