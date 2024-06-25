@@ -25,6 +25,6 @@ Once LAMMPS is properly installed you can then set up your simulations by:
 5. Go to your set directory (‘~/scenario1‘) in this example. You can do this by running `cd ~/scenario1`
 6. Run the [Python setup script](MakeLammpsInput.py) from the set directory giving it a seed for the random number generator from the command line: `python3 ${path_to_this_repository}/MakeLammpsInput.py 12345` for example, to set it up with seed `12345`
 7. Go to the seed folder. Run `cd sd12345`
-8. Run the LAMMPS executable from the seed folder: `${path_to_this_repository}/lammps/src/lmp_mpi -in in.local`
+8. Run the LAMMPS executable from the seed folder: `${path_to_this_repository}/LAMMPS_installation/lammps/src/lmp_serial -in in.local`
 9. Repeat this procedure for all the different replicas you might want to run in order to get proper statistics.
 10. Run the [analysis](analysis) from this repository by typing `python3 analyse_trajectory.py ~/scenario1` for this particular example from the [analysis](analysis) folder. This will output a .txt file with the budding times for each seed in `scenario1`.
