@@ -50,13 +50,35 @@ def extract(path, rmax = 1.5):
     data.to_csv('%s/clusters.txt'%(path))
     return data
 
+def analyse_seeds(path, rmax = 1.5):
+    # Change directory to path
+    r = os.chdir(path)
+    # Get list of seeds
+    seeds = glob.glob('sd*')
+    # Initialize list to store budding frames
+    buds = []
+    # Loop over seeds
+    for seed in seeds:
+        # Extract clusters from seed
+        data = extract(seed, rmax)
+        # Check if budding occurs
+        if 2 in data['ncl'].values:
+            # If budding occurs, store frame number
+            buds.append(data[data['ncl'] == 2].iloc[0]['frame'])
+    # Build pandas dataframe with budding frames
+    buds = pd.DataFrame({'seed':seeds,'frame':buds})
+    # Save dataframe to file and return it
+    buds.to_csv('budding_frames.txt')
+    return buds
+
 if __name__ == '__main__':
 
-    # Define path to trajectory from command line argument
-    path = sys.argv[1]
+    # Define path to parameter set (set of simulations for the same parameters but different RNG seeds)
+    gpath = sys.argv[1]
 
     # Extract clusters from trajectory
-    data = extract(path)
+    # data = extract(path)
+    data = analyse_seeds(gpath)
 
     # Print frame where budding occurs
-    print("Budding occurs at frame %d"%(data[data['ncl'] == 2].iloc[0]['frame']))
+    print(data)
