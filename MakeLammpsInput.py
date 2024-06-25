@@ -29,7 +29,7 @@ def main():
     
     
     
-    seed = sys.argv[1]
+    seed = int(sys.argv[1])
 
     r = os.mkdir('%s/sd%d'%(InputPath,seed))
         
