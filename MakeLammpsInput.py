@@ -43,7 +43,7 @@ dimension		3
 units			lj
 atom_style		hybrid sphere dipole
 boundary		p p p\n''')
-    f_in.write('read_data			"'+InputPath + '/data"\n') # here we specify where the data is for the initial configurations of our particles
+    f_in.write('read_data			"'+InputPath + '/sd%d/data"\n'%(seed)) # here we specify where the data is for the initial configurations of our particles
     f_in.write('''
     #group particles according to their types
 
