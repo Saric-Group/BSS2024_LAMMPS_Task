@@ -35,4 +35,4 @@ Once LAMMPS is properly installed you can then set up your simulations by:
 
 ## Visualising trajectories
 
-In order to *see* your resulting engulfment trajectories you will need a visualisation tool such as [Ovito](https://www.ovito.org) which can be downloaded and installed following the intructions at [this website](https://www.ovito.org/manual/installation.html). 
+In order to *see* your resulting engulfment trajectories you will need a visualisation tool such as [Ovito](https://www.ovito.org) which can be downloaded and installed following the intructions at [this website](https://www.ovito.org/manual/installation.html). You can then load [this file](visualise.ovito) into Ovito and adjust the trajectory path to visualise the simulation results.
