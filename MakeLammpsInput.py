@@ -132,23 +132,34 @@ run            50000''') ### IF you want to change the length of the simulation,
 
     print("Writing data file ... ")
     
-    
     f_dat = open(InputPath + '/sd%d/data'%(seed),'w')
-    w=0
-    
+
+    # Reading the original data file
     f_ogdat = open(InputPath+"/Inputs//Membrane.data")
-    #while w==1:
-    for l in range(2944):
-        line = f_ogdat.readline()
+    lines = f_ogdat.readlines()
+    f_ogdat.close()
+
+    # Box lines
+    blines = lines[7:10]
+    # Membrane positions lines
+    mlines = lines[41:2944]
+
+    # Writing the data file
+    f_dat.write('LAMMPS data file\n\n')
+    f_dat.write(str(2901+NumPatches)+' atoms\n')
+    f_dat.write(str(2+NumPatches)+' atom types\n')
+    for line in blines:
+        f_dat.write(line)
+    f_dat.write('\n')
+    f_dat.write('Masses\n\n')
+    for i in range(NumPatches+2):
+        f_dat.write(str(i+1)+' 1\n')
+    f_dat.write('\n')
+    for line in mlines:
         f_dat.write(line)
     for n in range(NumPatches):
-        f_dat.write(str(2902+n)+ ' ' + str(types[n])+' ' +str(x[n]+6.5)+' ' +str(y[n]+6.5)+ ' ' +str(z[n]+6.5)+'  1 1 0   0 0 0\n') ## Inputing postitions of patches
-        line = f_ogdat.readline()
-    while True :
-        if len(line) == 0:
-            break
-        line = f_ogdat.readline()
-        f_dat.write(line)
+        f_dat.write(str(2902+n)+ ' ' + str(types[n])+' ' +str(x[n])+' ' +str(y[n])+ ' ' +str(z[n]+6.5)+'  1 1 0   0 0 0\n') ## Inputing postitions of patches
+    f_dat.close()
         
         
     
