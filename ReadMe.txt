@@ -10,3 +10,6 @@ python /Users/billiemeadowcroft/Dropbox/BoulderSummerSchool/Task/
 
 
 /Users/billiemeadowcroft/Dropbox/code/Lammps_starter/np-toolkit/lammps/src/lmp_mpi -in in.local
+
+
+python /Users/billiemeadowcroft/Dropbox/BoulderSummerSchool/Task/BSS2024_LAMMPS_Task/analysis/analyse_set.py

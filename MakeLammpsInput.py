@@ -18,6 +18,17 @@ def main():
     epslions = f.Epsilon # this is the interaction strength of patches (could be changed to have different values for different patches)
     x,y,z = f.x,f.y,f.z    
     NumPatches= len(IDs)
+    
+    
+    #f2 = open(InputPath+"/Inputs/InputData2.txt",'w')
+    #f2.write('ID type Epsilon x y z\n')
+    #for i in range(len(IDs)):
+    #    f2.write(str(IDs[i])+' '+str(types[i])+' '+str(epslions[i])+' '+str(x[i])+' '+str(y[i])+' '+str(float(z[i]-6.5))+'\n')
+    #f2.close()
+    
+    
+    
+    
     seed = sys.argv[1]
     
     
@@ -131,13 +142,14 @@ run            50000''') ### IF you want to change the length of the simulation,
         line = f_ogdat.readline()
         f_dat.write(line)
     for n in range(NumPatches):
-        f_dat.write(str(2902+n)+ ' ' + str(types[n])+' ' +str(x[n])+' ' +str(y[n])+ ' ' +str(z[n])+'  1 1 0   0 0 0\n') ## Inputing postitions of patches
+        f_dat.write(str(2902+n)+ ' ' + str(types[n])+' ' +str(x[n]+6.5)+' ' +str(y[n]+6.5)+ ' ' +str(z[n]+6.5)+'  1 1 0   0 0 0\n') ## Inputing postitions of patches
         line = f_ogdat.readline()
     while True :
         if len(line) == 0:
             break
         line = f_ogdat.readline()
         f_dat.write(line)
+        
         
     
   
