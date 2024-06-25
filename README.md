@@ -13,7 +13,7 @@ In order to run the simulations on your laptop you will need to first download a
 
 Once LAMMPS is properly installed you can then set up your simulations by:
 
-1. Create a directory where you will be running all the replicas (different simulations with different RNG seeds for a given set of parameters) for a given scenario. For example `~/scenario1`
+1. Create a directory where you will be running all the replicas (different simulations with different RNG seeds for a given set of parameters) for a given scenario. For example `~/scenario1` by running `mkdir ~/scenario1`
 2. Copy the [Inputs](Inputs) folder into that directory. In this example you can just run `cp -r ./Inputs ~/scenario1` from [here](./)
 3. Edit the [InputData.txt](Inputs/InputData.txt) according to the scenario you want to explore.
     [InputData.txt](Inputs/InputData.txt) contains the details of the binding sites on the nanoparticle. Besides the header, the file contains one line per binding site specifying the position (coordinates) and binding interaction strength.
