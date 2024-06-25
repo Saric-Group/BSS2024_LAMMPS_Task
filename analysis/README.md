@@ -14,5 +14,6 @@ And install the required packages
 
     pip3 install ovito
     pip3 install freud-analysis
+    pip3 install pandas
     
 
