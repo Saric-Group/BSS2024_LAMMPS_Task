@@ -9,7 +9,7 @@ import pandas
 
 def main():
     
-    InputPath = os.path.join(str(os.getcwd()),"Inputs/")
+    InputPath = os.path.join(str(os.getcwd()))
     
     print("Reading data ... ")
     f = pandas.read_csv(InputPath+"InputData.txt", header = [0],sep = ' ')
@@ -18,7 +18,10 @@ def main():
     epslions = f.Epsilon # this is the interaction strength of patches (could be changed to have different values for different patches)
     x,y,z = f.x,f.y,f.z    
     NumPatches= len(IDs)
+    seed = sys.argv(
     
+    
+        
     print("Writing input file ... ")
     
     f_in = open(InputPath + 'in.local','w') # this is our input files directory
@@ -94,9 +97,10 @@ fix			fNPH		mem		nph/sphere	x 0.0 0.0 10.0	y 0.0 0.0 10.0 couple xy update dipol
 fix_modify	fNPH		temp ct press thermo_press
 fix			fRIGID		np		rigid/nve	group 1 np
 
-#output settings, changing peps will change the output file name as well, change this by removing ${peps} from the dump file name
+#output settings, changing peps will change the output file name as well, change this by removing ${peps} from the dump file name''')
 
-dump			coords all custom 100 output.xyz id type x y z c_cls
+    f_in.write('dump			coords all custom 100 output.xyz id type x y z c_cls')
+    f_in.write('''  
 dump_modify	coords sort id
 
 thermo_style	custom	step pe ke etotal
