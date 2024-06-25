@@ -12,7 +12,7 @@ def main():
     InputPath = os.path.join(str(os.getcwd()))
     
     print("Reading data ... ")
-    f = pandas.read_csv(InputPath+"/InputData.txt", header = [0],sep = ' ')
+    f = pandas.read_csv(InputPath+"/Inputs/InputData.txt", header = [0],sep = ' ')
     IDs = f.ID
     types = f.type
     epslions = f.Epsilon # this is the interaction strength of patches (could be changed to have different values for different patches)
@@ -125,7 +125,7 @@ run            50000''') ### IF you want to change the length of the simulation,
     f_dat = open(InputPath + '/data','w')
     w=0
     
-    f_ogdat = open(InputPath+"/Membrane.data")
+    f_ogdat = open(InputPath+"/Inputs//Membrane.data")
     #while w==1:
     for l in range(2944):
         line = f_ogdat.readline()
