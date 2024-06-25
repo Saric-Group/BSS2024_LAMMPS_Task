@@ -14,8 +14,9 @@ if [ ! -d $LAMMPSDIR ]; then
                 echo "extract this tar and copy the resulting file to the lammps directory"
         else
                 curl -O https://download.lammps.org/tars/lammps-16Feb2016.tar.gz
-		tar -xzvf lammps-16Feb2016.tar.gz -C $LAMMPSDIR
-                # mv lammps* $LAMMPSDIR
+		tar -xzvf lammps-16Feb2016.tar.gz
+  		rm lammps-16Feb2016.tar.gz
+                mv lammps* $LAMMPSDIR
         fi
 fi
 
