@@ -1,0 +1,104 @@
+
+    
+# set up our simulation environment
+dimension		3
+units			lj
+atom_style		hybrid sphere dipole
+boundary		p p p
+read_data			"/Users/billiemeadowcroft/Dropbox/BoulderSummerSchool/Task/BSS2024_LAMMPS_Task/Inputs/data"
+
+    #group particles according to their types
+
+group		mem			type 1
+group		vehicle		type 2
+group		ligand 		type 3:26
+group		np      	type 2:26
+
+
+#give our particle a small kick towards the membrane
+
+velocity	np	set 0 0 -2
+
+#membrane parameters (see Yuan 2011)
+variable	rc			equal	2.6
+variable	rmin		equal	1.122462
+variable	rclus		equal	2.0
+variable	mu			equal	3
+variable	zeta		equal	4
+variable	eps			equal	4.34
+variable	sigma		equal	1.00
+variable	theta0_11	equal	0
+variable 	memsize equal "count(mem)"
+
+# nanoparticle parameters
+
+variable	peps		equal	2.2
+
+# set up additional variables to be computed during the simulation (see lammps wiki for full explainations)
+
+#compute 		1 		all 		pair lj/cut epair
+compute 		cls 	all 		cluster/atom ${rclus}
+compute 		ct 		all 		temp/sphere
+compute_modify 	ct 		extra 		${memsize}
+
+# set up the pair style for the membrane
+
+pair_style	hybrid		membrane ${rc}	lj/cut 5.04
+
+# membrane-nanoparticle interactions, each is set separately so any distribution of ligand strengths is possible
+
+pair_coeff		*	*	lj/cut		0.0				0.0	0.0
+pair_coeff		1	2	lj/cut		100				4.0	4.45
+pair_coeff		1	3	lj/cut		10			1	1.8
+pair_coeff		1	4	lj/cut		10			1	1.8
+pair_coeff		1	5	lj/cut		10			1	1.8
+pair_coeff		1	6	lj/cut		10			1	1.8
+pair_coeff		1	7	lj/cut		10			1	1.8
+pair_coeff		1	8	lj/cut		10			1	1.8
+pair_coeff		1	9	lj/cut		10			1	1.8
+pair_coeff		1	10	lj/cut		10			1	1.8
+pair_coeff		1	11	lj/cut		10			1	1.8
+pair_coeff		1	12	lj/cut		10			1	1.8
+pair_coeff		1	13	lj/cut		10			1	1.8
+pair_coeff		1	14	lj/cut		10			1	1.8
+pair_coeff		1	15	lj/cut		10			1	1.8
+pair_coeff		1	16	lj/cut		10			1	1.8
+pair_coeff		1	17	lj/cut		10			1	1.8
+pair_coeff		1	18	lj/cut		10			1	1.8
+pair_coeff		1	19	lj/cut		10			1	1.8
+pair_coeff		1	20	lj/cut		10			1	1.8
+pair_coeff		1	21	lj/cut		10			1	1.8
+pair_coeff		1	22	lj/cut		10			1	1.8
+pair_coeff		1	23	lj/cut		10			1	1.8
+pair_coeff		1	24	lj/cut		10			1	1.8
+pair_coeff		1	25	lj/cut		10			1	1.8
+pair_coeff		1	26	lj/cut		10			1	1.8
+#we set the interaction to zero at its cutoff distance, otherwise we will have a discontinuity
+
+pair_modify		pair 	lj/cut	shift yes
+
+#membrane-membrane interactions (these can be changed by messing with the variables at the top)
+
+pair_coeff		1	1	membrane ${eps} ${sigma} ${rmin} ${rc} ${zeta} ${mu} ${theta0_11}
+
+neigh_modify	every 1	delay 1	exclude group np np
+
+# we set up the integration parameters
+
+fix			fLANG		all		langevin 1.0 1.0 1.0 1000 zero yes omega yes
+fix			fNPH		mem		nph/sphere	x 0.0 0.0 10.0	y 0.0 0.0 10.0 couple xy update dipole dilate all
+fix_modify	fNPH		temp ct press thermo_press
+fix			fRIGID		np		rigid/nve	group 1 np
+
+#output settings, changing peps will change the output file name as well, change this by removing ${peps} from the dump file name
+
+dump			coords all custom 100 output.xyz id type x y z c_cls
+dump_modify	coords sort id
+
+thermo_style	custom	step pe ke etotal
+
+# set up our timestep and runtime
+
+timestep       0.01
+thermo         100
+run            50000
