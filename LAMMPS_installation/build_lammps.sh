@@ -18,7 +18,8 @@ if [ ! -d $LAMMPSDIR ]; then
                 echo "copy this link into your browser: https://download.lammps.org/tars/lammps-16Feb2016.tar.gz"
                 echo "extract this tar and copy the resulting file to the lammps directory"
         else
-                curl -O https://download.lammps.org/tars/lammps-16Feb2016.tar.gz | tar xvz 
+                curl -O https://download.lammps.org/tars/lammps-16Feb2016.tar.gz
+		tar -xzvf lammps-16Feb2016.tar.gz
                 mv lammps* $LAMMPSDIR
         fi
 fi
