@@ -32,3 +32,7 @@ Once LAMMPS is properly installed you can then set up your simulations by:
 8. Run the LAMMPS executable from the seed folder: `${path_to_this_repository}/LAMMPS_installation/lammps/src/lmp_serial -in in.local`
 9. Repeat this procedure for all the different replicas you might want to run in order to get proper statistics.
 10. Run the [analysis](analysis) from this repository by typing `python3 analyse_trajectory.py ~/scenario1` for this particular example from the [analysis](analysis) folder. This will output a .txt file with the budding times for each seed in `scenario1`.
+
+## Visualising trajectories
+
+In order to *see* your resulting engulfment trajectories you will need a visualisation tool such as [Ovito](https://www.ovito.org) which can be downloaded and installed following the intructions at [this website](https://www.ovito.org/manual/installation.html). 
