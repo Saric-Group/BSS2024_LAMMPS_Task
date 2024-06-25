@@ -1,10 +1,5 @@
 #!/bin/bash
 
-#this script requires wget, python 2.7, virtualenv and pip
-#OS-X has trouble with the gpu package of lammps, install XCode8 (not 9) and CUDA
-
-#commented out lines allow for the building of a gpu accelerated version. I will clean this process up at some point...
-
 STARTDIR=$(pwd)
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 WDIR=$(pwd)
