@@ -18,7 +18,7 @@ if [ ! -d $LAMMPSDIR ]; then
                 echo "copy this link into your browser: http://lammps.sandia.gov/tars/lammps-16Feb16.tar.gz"
                 echo "extract this tar and copy the resulting file to the lammps directory"
         else
-                wget -qO- http://lammps.sandia.gov/tars/lammps-16Feb16.tar.gz | tar xvz 
+                wget -qO- https://download.lammps.org/tars/lammps-16Feb2016.tar.gz | tar xvz 
                 mv lammps* $LAMMPSDIR
         fi
 fi
