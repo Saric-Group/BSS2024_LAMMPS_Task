@@ -36,3 +36,8 @@ Once LAMMPS is properly installed you can then set up your simulations by:
 ## Visualising trajectories
 
 In order to *see* your resulting engulfment trajectories you will need a visualisation tool such as [Ovito](https://www.ovito.org) which can be downloaded and installed following the intructions at [this website](https://www.ovito.org/manual/installation.html). You can then load [this file](visualise.ovito) into Ovito and adjust the trajectory path to visualise the simulation results.
+
+## The membrane model and nanoparticle
+
+The membrane model used in these simulations is a coarse-grained model implemented in Molecular Dynamics (LAMMPS. www.lammps.org) developed by [Yuan et al (2010)](https://doi.org/10.1103/PhysRevE.82.011905). It represents a patch of lipids by a bead, where beads interact via a two-body anisotropic interaction potential. The anisotropic potential ensures beads prefer to be aligned along their axis and therefore self-assemble into membrane sheets and vesicles. Solute is implicitly modelled via this potential. The parameters of the interaction potential can be tuned to achieve membranes with different properties, such as bending rigidity, tension and fluidity. For the purpose of this exercise, the interaction parameters are kept fix and the resulting membrane has biologically relevant properties.
+
