@@ -9,6 +9,22 @@ import sys
 from ovito.io import import_file
 import freud
 
+def get_wrapping(p, f):
+    d = p.compute(f)
+    positions = np.array(d.particles['Position'])
+    types = np.array(d.particles['Particle Type'])
+    box = freud.Box.from_matrix(d.cell[...])
+    np_pos = positions[types == 2]
+    mem_pos = positions[types == 1]
+    aabb = freud.locality.AABBQuery(box, mem_pos)
+    neighbors = aabb.query(np_pos, {'r_max': 5.5})
+    # neighbors = [len(n) for n in neighbors]
+    neighbors = sum(1 for _ in neighbors)
+    # area= np.pi*0.5**2*len(neighbors)
+    area= np.pi*0.5**2*neighbors
+    spharea = 4*np.pi*4.5**2
+    wrapping = area/spharea
+    return wrapping
 
 def extract(path, rmax = 1.5):
     # Load trajectory
@@ -43,13 +59,15 @@ def extract(path, rmax = 1.5):
         # Store number of clusters and frame number
         ncl.append(len(sizes))
         frs.append(f)
+
+    final_wrapping = get_wrapping(p, nf)
     
     # Define pandas dataframe with number of clusters per frame and frame numbers
     data = pd.DataFrame({'frame':frs, 'ncl':ncl})
 
     # Save dataframe to file and return it
     data.to_csv('%s/clusters.txt'%(path))
-    return data
+    return data, final_wrapping
 
 def analyse_seeds(path, rmax = 1.5):
     # Change directory to path
@@ -58,10 +76,12 @@ def analyse_seeds(path, rmax = 1.5):
     seeds = glob.glob('sd*')
     # Initialize list to store budding frames
     buds = []
+    wraps = []
     # Loop over seeds
     for seed in seeds:
         # Extract clusters from seed
-        data = extract(seed, rmax)
+        data, final_wrapping = extract(seed, rmax)
+        wraps.append(final_wrapping)
         # Check if budding occurs
         if 2 in data['ncl'].values:
             # If budding occurs, store frame number
@@ -73,7 +93,11 @@ def analyse_seeds(path, rmax = 1.5):
     buds = pd.DataFrame({'seed':seeds,'frame':buds})
     # Save dataframe to file and return it
     buds.to_csv('budding_frames.txt')
-    return buds
+    # Build pandas dataframe with wrapping
+    wraps = pd.DataFrame({'seed':seeds,'wrapping':wraps})
+    # Save dataframe to file and return it
+    wraps.to_csv('wrapping.txt')
+    return buds, wraps
 
 if __name__ == '__main__':
 
@@ -82,11 +106,14 @@ if __name__ == '__main__':
 
     # Extract clusters from trajectory
     # data = extract(path)
-    data = analyse_seeds(gpath)
+    data_bud, data_wrap = analyse_seeds(gpath)
 
     # Print frame where budding occurs
     print()
     print()
-    print(data)
+    print(data_bud)
+    print()
+    print()
+    print(data_wrap)
     print()
     print()
